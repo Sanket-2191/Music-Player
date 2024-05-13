@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- <link href="./src/input.css" rel="stylesheet"> -->
+      <link href="./src/output.css" rel="stylesheet">
+      <script src="https://kit.fontawesome.com/13cf9d3174.js" crossorigin="anonymous"></script>
+      <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+      <title></title>
+  </head>
+  <body class="">
+    <header class="w-full relative h-fit">
+      <nav class="fixed top-0 w-full z-10">
+        <div class="w-full h-fit" style="background-color: var(--primary-color);">
+
+          <div class="mx-0 flex w-[100%] items-center justify-between 
+          py-3 ">
+
+            <div class="w-[20%]">
+              <div
+               id="logo" class="ml-2 inline-flex items-center cursor-pointer">
+                <span>
+                  <svg
+                    width="30"
+                    height="30"
+                    viewBox="0 0 50 56"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M23.2732 0.2528C20.8078 1.18964 2.12023 12.2346 1.08477 13.3686C0 14.552 0 14.7493 0 27.7665C0 39.6496 0.0986153 41.1289 0.83823 42.0164C2.12023 43.5449 23.2239 55.4774 24.6538 55.5267C25.9358 55.576 46.1027 44.3832 48.2229 42.4602C49.3077 41.474 49.3077 41.3261 49.3077 27.8158C49.3077 14.3055 49.3077 14.1576 48.2229 13.1714C46.6451 11.7415 27.1192 0.450027 25.64 0.104874C24.9497 -0.0923538 23.9142 0.00625992 23.2732 0.2528ZM20.2161 21.8989C20.2161 22.4906 18.9835 23.8219 17.0111 25.3997C15.2361 26.7803 13.8061 27.9637 13.8061 28.0623C13.8061 28.1116 15.2361 29.0978 16.9618 30.2319C18.6876 31.3659 20.2655 32.6479 20.4134 33.0917C20.8078 34.0286 19.871 35.2119 18.8355 35.2119C17.8001 35.2119 9.0233 29.3936 8.67815 28.5061C8.333 27.6186 9.36846 26.5338 14.3485 22.885C17.6521 20.4196 18.4904 20.0252 19.2793 20.4196C19.7724 20.7155 20.2161 21.3565 20.2161 21.8989ZM25.6893 27.6679C23.4211 34.9161 23.0267 35.7543 22.1391 34.8668C21.7447 34.4723 22.1391 32.6479 23.6677 27.9637C26.2317 20.321 26.5275 19.6307 27.2671 20.3703C27.6123 20.7155 27.1685 22.7864 25.6893 27.6679ZM36.0932 23.2302C40.6788 26.2379 41.3198 27.0269 40.3337 28.1609C39.1503 29.5909 31.6555 35.2119 30.9159 35.2119C29.9298 35.2119 28.9436 33.8806 29.2394 33.0424C29.3874 32.6479 30.9652 31.218 32.7403 29.8867L35.9946 27.4706L32.5431 25.1532C30.6201 23.9205 29.0915 22.7371 29.0915 22.5892C29.0915 21.7509 30.2256 20.4196 30.9159 20.4196C31.3597 20.4196 33.6771 21.7016 36.0932 23.2302Z"
+                      fill="var(--text-color)"
+                    ></path>
+                  </svg>
+                </span>
+                <span class="font-bold text-[var(--text-color)]">RAGAFY</span>
+              </div>
+              </div>
+
+            <div
+            class="flex flex-col grow items-start lg:flex text-[var(--text-color)]">
+              <button
+                type="button"
+                id="drop-down-menu"
+                class="lg:hidden rounded-md bg-[var(--ternary-color)] px-3 py-2 text-sm 
+                font-semibold text-white shadow-sm hover:bg-black/80 
+                "
+              >
+                Menu
+              </button>
+              <ul id="menu-list" 
+              class="ml-[16%] top-[3rem] absolute left-5 flex flex-col
+               lg:top-1 lg:relative lg:ml-12 lg:flex-row space-x-8
+              bg-[--primary-color]">
+                <li>
+                  <a
+                    id="home"
+                    href="#"
+                    class="text-sm font-semibold  hover:text-gray-500"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <select id="genre-Selection" 
+                  class="select select-info w-full max-w-xs text-sm font-semibold
+                   hover:text-gray-500
+                  bg-[--primary-color] text-[--text-color]">
+                    <option disabled selected>Select Genre</option>
+                  </select>
+                </li>
+                <!-- <li>
+                  <a
+                    id="singer"
+                    href="#"
+                    class="text-sm font-semibold  hover:text-gray-500"
+                  >
+                    Singer
+                  </a>
+                </li> -->
+              </ul>
+            </div>
+
+            <!-- light and dark theme switcher.................................................................................. -->
+            <span id="theme-icon" class="mx-3 cursor-pointer">
+              
+              <i class="fa-solid fa-sun" style="color: #e7eaee;"></i>
+            </span>
+            
+          </div>
+        </div>
+            
+      </nav>
+    </header>
+
+    <main class="mt-[60px] mb-0 h-[100%]">
+      <div id="conformation" class=" fixed w-fit h-fit"></div>
+      <aside id="aside-playlist" class="transition-all hidden fixed w-[30%] lg:w-[20%] lg:z-1 lg:flex h-screen flex-col 
+      overflow-y-auto border-r bg-[var(--primary-color)] px-5 py-8 bg-opacity-70">
+        <a href="#">
+          <svg
+            
+            width="40"
+            height="46"
+            viewBox="0 0 50 56"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M23.2732 0.2528C20.8078 1.18964 2.12023 12.2346 1.08477 13.3686C0 14.552 0 14.7493 0 27.7665C0 39.6496 0.0986153 41.1289 0.83823 42.0164C2.12023 43.5449 23.2239 55.4774 24.6538 55.5267C25.9358 55.576 46.1027 44.3832 48.2229 42.4602C49.3077 41.474 49.3077 41.3261 49.3077 27.8158C49.3077 14.3055 49.3077 14.1576 48.2229 13.1714C46.6451 11.7415 27.1192 0.450027 25.64 0.104874C24.9497 -0.0923538 23.9142 0.00625992 23.2732 0.2528ZM20.2161 21.8989C20.2161 22.4906 18.9835 23.8219 17.0111 25.3997C15.2361 26.7803 13.8061 27.9637 13.8061 28.0623C13.8061 28.1116 15.2361 29.0978 16.9618 30.2319C18.6876 31.3659 20.2655 32.6479 20.4134 33.0917C20.8078 34.0286 19.871 35.2119 18.8355 35.2119C17.8001 35.2119 9.0233 29.3936 8.67815 28.5061C8.333 27.6186 9.36846 26.5338 14.3485 22.885C17.6521 20.4196 18.4904 20.0252 19.2793 20.4196C19.7724 20.7155 20.2161 21.3565 20.2161 21.8989ZM25.6893 27.6679C23.4211 34.9161 23.0267 35.7543 22.1391 34.8668C21.7447 34.4723 22.1391 32.6479 23.6677 27.9637C26.2317 20.321 26.5275 19.6307 27.2671 20.3703C27.6123 20.7155 27.1685 22.7864 25.6893 27.6679ZM36.0932 23.2302C40.6788 26.2379 41.3198 27.0269 40.3337 28.1609C39.1503 29.5909 31.6555 35.2119 30.9159 35.2119C29.9298 35.2119 28.9436 33.8806 29.2394 33.0424C29.3874 32.6479 30.9652 31.218 32.7403 29.8867L35.9946 27.4706L32.5431 25.1532C30.6201 23.9205 29.0915 22.7371 29.0915 22.5892C29.0915 21.7509 30.2256 20.4196 30.9159 20.4196C31.3597 20.4196 33.6771 21.7016 36.0932 23.2302Z"
+              fill="var(--text-color)"
+            ></path>
+          </svg>
+        </a>
+        <div class="mt-6 flex flex-1 flex-col justify-between">
+          <nav class="-mx-3 space-y-6 text-[var(--text-color)] ">
+            <div class="space-y-3">
+              <label class="px-3 text-xs font-semibold uppercase text-[var(--seconday-color)]">
+                Library
+              </label>
+              
+                <ul id="show-playlists">
+                </ul>
+              
+            </div>
+            <div class="space-y-3 ">
+              <label class="px-3 text-xs font-semibold uppercase">
+                Create Playlist
+              </label> 
+              <form action="" id="create-new-playlist" 
+              class="flex flex-col justify-between items-center" 
+              >
+                <div class="block mb-2 h-fit w-fit mx-auto" id="start-PL-creation">
+                  <button class="flex items-center justify-center
+                      rounded-lg text-gray-600 
+                      transition-colors duration-300 hover:bg-[var(--text-color)]
+                      hover:text-gray-700 mx-auto mb-2"
+                      type="button">
+                      <span class="mx-2 p-2 text-sm font-extrabold ">
+                        <i id="add-Icon" 
+                        class="fa-lg fa-solid fa-plus" 
+                        style="color: var(--secondary-color);"></i>
+                      </span>
+                  </button>
+                </div>
+                <div class="hidden  my-1 h-fit w-fit mx-auto" id="name-PL-input" >
+                  <input type="text" 
+                  class="block p-2 outline-[var(--text-color)] focus:outline-[var(--text-color)] 
+                  mx-auto rounded-sm bg-[var(--secondary-color)] 
+                  text-[var(--text-color)]" >
+                </div>
+                <div class="hidden  mt-2 h-fit w-fit mx-auto p-2" id="save-PL-name">
+                  <button class="flex items-center justify-center mt-1
+                  rounded-lg transition-colors duration-300h hover:bg-[var(--text-color)]
+                  mx-auto mb-2 " type="reset">
+                  <i class="fa-lg fa-solid fa-folder-closed fa-beat-fade"
+                  style="color: var(--text-color);"></i>
+                  </button>
+                </div>
+              
+              </form>
+            
+            </div>
+            
+          </nav>
+        </div>
+       
+        
+      </aside>
+      
+      <section class="relative w-[100%] lg:w-[80%]  lg:ml-[20%] px-3 flex flex-col justify-center items-center">
+          
+        <p id="toggle-collapse" class=" text-[var(--text-color)] font-bold mt-3">
+          Now Playing <span ><i class="fa-solid fa-eject cursor-pointer " id="up-down-btn"></i></span>
+        </p>
+        <article id="playing-now" class="flex flex-col justify-center items-center w-[300px] mt-[15px] mb-[10px] bg-transparent bg-opacity-10 ">
+            <audio src="" id="played-song"></audio>
+
+            <div id="music-img" class="relative h-[400px] w-[300px] rounded-md ">
+                <img
+                id="music-img"
+                  src="" alt=""
+                  class="z-0 h-full w-full rounded-md object-cover"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 text-left">
+                  <h1 id="song-Name" class="text-lg font-semibold text-white"></h1>
+                  <p id="info-singers" class="mt-2 text-sm text-gray-300">
+                    
+                  </p>
+                  
+                </div>
+            </div>
+            <div id="controls" class="flex flex-col justify-center items-center w-[300px]  h-fit">
+
+              <div id="button-controls " class="w-fit h-fit justify-center items-center px-2">
+                <button id="previous" class="mr-4 my-0 w-10 h-10  ">
+                  <i class="fa-solid fa-backward" style="color: var(--text-color);"></i>
+                </button>
+                
+                <button id="play-pause" class="m-4 my-0 w-10 h-10 ">
+                  <i class="fa-solid fa-play" style="color: var(--text-color);"></i>
+                  <!-- <i class="fa-solid fa-pause" style="color: var(--text-color);"></i> -->
+                </button>
+                <button id="next" class="ml-4 my-0 w-10 h-10 ">
+                  <i class="fa-solid fa-forward" style="color: var(--text-color);"></i>
+                </button>
+              </div>
+              <div id="seek-control" class="flex justify-center items-center p-2 w-[100%] h-fit">
+                <div id="passed-duration" 
+                class="mr-2">
+                  0:00
+                </div>
+                <div id="seek" class="mx-1 w-[80%]" >
+                  <input id="input-seek" type="range" min="0" max="4.5" step="0.1" value="4.2" 
+                  class="color-[var(--ternary-color)] hidden"/>
+                  <label id="seek-label" for="input-seek" class="flex w-[100%] h-2 bg-[var(--text-color)] rounded-md overflow-hidden">
+                    <div id="seek-display" class=" h-2 bg-[var(--ternary-color)] rounded-md"></div>
+                  </label>
+                </div>
+                <div id="re-duration" class="ml-2">
+                  4:30
+                </div>
+              </div>
+              
+            </div>
+            
+        </article>
+
+        
+        <section class="mx-auto w-full max-w-7xl px-4 py-4 ">
+          <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
+            <h2 id="playlist-name" class="text-lg font-semibold">ALL Songs</h2>
+          </div>
+          <div class="mt-6 flex flex-col shadow-lg">
+            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+              <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                <div class="overflow-hidden border border-[var(--ternary-color)] md:rounded-lg">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-[var(--primary-color)]">
+                      <tr class="text-left text-sm font-normal text-[var(--text-color)]">
+                        <th
+                          scope="col"
+                          class="px-4 py-3.5 "
+                        >
+                          <span>Song</span>
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-12 py-3.5"
+                        >
+                          Singers
+                        </th>
+                        <th
+                          scope="col"
+                          class="px-12 py-3.5"
+                        >
+                          Add to Playlist
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody id="songs-table" class="divide-y divide-gray-200 bg-[var(--primary-color)]  text-[var(--text-color)]">
+                      
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+      </section>
+
+      
+    </main>
+
+    <footer style="background-color: var(--secondary-color);" id="footer"
+    class="relative w-[100%] z-0 lg:w-[80%] lg:ml-[20%] mt-2 mb-[0%]">
+      <section class="relative overflow-hidden py-10">
+          <div class="relative z-10 mx-auto max-w-7xl px-4">
+              <div class="-m-6 flex flex-wrap">
+                  <div class="w-full p-6 md:w-1/2 lg:w-5/12">
+                  <div class="flex h-full flex-col justify-between">
+                      <div class="mb-4 inline-flex items-center">
+                      <svg
+                          width="40"
+                          height="46"
+                          viewBox="0 0 50 56"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                      >
+                          <path
+                          d="M23.2732 0.2528C20.8078 1.18964 2.12023 12.2346 1.08477 13.3686C0 14.552 0 14.7493 0 27.7665C0 39.6496 0.0986153 41.1289 0.83823 42.0164C2.12023 43.5449 23.2239 55.4774 24.6538 55.5267C25.9358 55.576 46.1027 44.3832 48.2229 42.4602C49.3077 41.474 49.3077 41.3261 49.3077 27.8158C49.3077 14.3055 49.3077 14.1576 48.2229 13.1714C46.6451 11.7415 27.1192 0.450027 25.64 0.104874C24.9497 -0.0923538 23.9142 0.00625992 23.2732 0.2528ZM20.2161 21.8989C20.2161 22.4906 18.9835 23.8219 17.0111 25.3997C15.2361 26.7803 13.8061 27.9637 13.8061 28.0623C13.8061 28.1116 15.2361 29.0978 16.9618 30.2319C18.6876 31.3659 20.2655 32.6479 20.4134 33.0917C20.8078 34.0286 19.871 35.2119 18.8355 35.2119C17.8001 35.2119 9.0233 29.3936 8.67815 28.5061C8.333 27.6186 9.36846 26.5338 14.3485 22.885C17.6521 20.4196 18.4904 20.0252 19.2793 20.4196C19.7724 20.7155 20.2161 21.3565 20.2161 21.8989ZM25.6893 27.6679C23.4211 34.9161 23.0267 35.7543 22.1391 34.8668C21.7447 34.4723 22.1391 32.6479 23.6677 27.9637C26.2317 20.321 26.5275 19.6307 27.2671 20.3703C27.6123 20.7155 27.1685 22.7864 25.6893 27.6679ZM36.0932 23.2302C40.6788 26.2379 41.3198 27.0269 40.3337 28.1609C39.1503 29.5909 31.6555 35.2119 30.9159 35.2119C29.9298 35.2119 28.9436 33.8806 29.2394 33.0424C29.3874 32.6479 30.9652 31.218 32.7403 29.8867L35.9946 27.4706L32.5431 25.1532C30.6201 23.9205 29.0915 22.7371 29.0915 22.5892C29.0915 21.7509 30.2256 20.4196 30.9159 20.4196C31.3597 20.4196 33.6771 21.7016 36.0932 23.2302Z"
+                          fill="black"
+                          ></path>
+                      </svg>
+                      <span class="ml-4 text-lg text-[var(--ternary-color)] font-bold">RAGAFY</span>
+                      </div>
+                      <div>
+                      
+                      <p class="text-sm text-[var(--ternary-color)]">
+                          © Copyright 2024. All Rights Reserved by Sanket_2191.
+                      </p>
+                      </div>
+                  </div>
+                  </div>
+                  <div class="w-full p-6 md:w-1/2 lg:w-2/12">
+                  <div class="h-full">
+                      <h3 class="tracking-px mb-9  text-xs font-semibold uppercase text-[var(--ternary-color)]">
+                      Support
+                      </h3>
+                      <ul>
+                      <li class="mb-4">
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Account
+                          </a>
+                      </li>
+                      <li class="mb-4">
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Help
+                          </a>
+                      </li>
+                      <li class="mb-4">
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Contact Us
+                          </a>
+                      </li>
+                      <li>
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Customer Support
+                          </a>
+                      </li>
+                      </ul>
+                  </div>
+                  </div>
+                  <div class="w-full p-6 md:w-1/2 lg:w-3/12">
+                  <div class="h-full">
+                      <h3 class="tracking-px mb-9  text-xs font-semibold uppercase text-[var(--ternary-color)]">
+                      Legals
+                      </h3>
+                      <ul>
+                      <li class="mb-4">
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Terms &amp; Conditions
+                          </a>
+                      </li>
+                      <li class="mb-4">
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Privacy Policy
+                          </a>
+                      </li>
+                      <li>
+                          <a
+                          class=" text-base font-medium text-[var(--ternary-color)] hover:text-gray-700"
+                          href="#"
+                          >
+                          Licensing
+                          </a>
+                      </li>
+                      </ul>
+                  </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+    </footer>
+      
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
+
