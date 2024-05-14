@@ -49,10 +49,6 @@ const allSongs = [
   },
 ]
 
-const allSongsPlaylist = {
-  name: 'All Songs',
-  songs: allSongs
-}
 
 // Options for genre............ 
 const genreList = [];
@@ -73,7 +69,7 @@ genreList.forEach(genre => {
   $('#genre-Selection').append(option);
 })
 
-window.localStorage.removeItem('PlayList')
+// window.localStorage.removeItem('PlayList')
 
 /*.............Switch Dark to light to dark................ */
 // const toggleTheme =
@@ -141,8 +137,6 @@ if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.ge
   console.log(playlists);
 }
 
-
-
 // Add NEW Playlist to Library..............................
 const addPToLibrary = (name) => {
   $("#start-PL-creation").removeClass('hidden');
@@ -161,7 +155,6 @@ const addPToLibrary = (name) => {
   playlists.forEach(playlist => {
     displayPlaylist(playlist)
   })
-
 
 }
 
@@ -204,7 +197,8 @@ const displayPlaylist = (playlist) => {
 
   playListBox.appendChild(playListName);
 
-  if (playlist.name !== 'Liked Songs') {
+  // Delete button for removing playlist from library....
+  if (playlist.name !== 'Liked Songs' && playlist.name !== 'All Songs') {
     const playlistDeleteBtn = document.createElement('button');
 
     playlistDeleteBtn.innerHTML = `<i id='delete-icon' class="fa-solid fa-trash"><i>`;
@@ -338,6 +332,18 @@ const renderSongs = (playList) => {
       // Handle adding/removing the song from the Liked Songs playlist
       const updatedPlaylist = JSON.parse(window.localStorage.getItem('PlayList') || []);
       const likedSongsPlaylist = updatedPlaylist.find(playlist => playlist.name === 'Liked Songs');
+      // For updated Liked songs in All Songs PlayList.... 
+      updatedPlaylist.forEach(playlist => {
+        if (playlist.name === 'All Songs') {
+          playlist.songs.forEach(song1 => {
+            if (song1.name == song.name) {
+              song1.liked = song.liked;
+              // return;
+            }
+          })
+          // return;
+        }
+      });
 
       if (song.liked) {
         // Add the song to the Liked Songs playlist if it's not already there
@@ -353,7 +359,8 @@ const renderSongs = (playList) => {
       window.localStorage.setItem('PlayList', JSON.stringify(updatedPlaylist));
       // playList = updatedPlaylist;
       // If the current playlist is the Liked Songs playlist, rerender the songs
-      renderSongs(playList)
+      console.log(updatedPlaylist)
+      // renderSongs(updatedPlaylist)
     });
     if (song.liked) {
       likeBtn.classList.remove('fa-regular');
@@ -406,7 +413,7 @@ const renderSongs = (playList) => {
 $('#home').on('click', () => {
   renderSongs(allSongsPlaylist);
 });
-const PL = JSON.parse(window.localStorage.getItem('PlayList')) || [];
-playlists.push(...PL);
+const ALLPlaylists = JSON.parse(window.localStorage.getItem('PlayList')) || [];
+const allSongsPlaylist = ALLPlaylists.find(playList => playList.name == "All Songs")
 renderSongs(allSongsPlaylist);
 
