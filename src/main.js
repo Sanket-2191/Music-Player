@@ -171,17 +171,6 @@ $("#start-PL-creation").on('click', () => {
   $("#save-PL-name").removeClass('hidden');
 });
 
-// swithch to next song on click of previous or next button....
-// create proper arrengement for it like storing "id" of next song in current one......
-
-
-// create shuffule mode.............
-
-
-// play song on clicking the song in list............. 
-
-
-
 //display playlist with name and delete button.................
 // add onclick function on individual playlist in libray to display songs in it 
 
@@ -214,8 +203,9 @@ const displayPlaylist = (playlist) => {
 
   document.querySelector('#show-playlists').appendChild(playListBox)
   playListBox.addEventListener('click', () => {
-    console.log(playlist)
-    renderSongs(playlist);
+    const currPL = (JSON.parse(window.localStorage.getItem('PlayList')) || []).find(pl => pl.name === playlist.name)
+    console.log(currPL)
+    renderSongs(currPL);
   })
 }
 
