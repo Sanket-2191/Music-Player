@@ -1,6 +1,6 @@
 // import { updateSongDisplay } from './music_player'
 
-const allSongs = [
+var allSongs = [
   {
     id: 0,
     name: "Satranga",
@@ -17,7 +17,7 @@ const allSongs = [
     artists: [],
     singer: ['Vishal Dadlani'],
     duration: 0,
-    imageURL: "",
+    imageURL: "./images/Vishal-Dadlani.webp",
     liked: false
   }, {
     id: 0,
@@ -26,7 +26,7 @@ const allSongs = [
     artists: [],
     singer: ['Arijit Singh'],
     duration: 0,
-    imageURL: "./images/arijit singh.jgp",
+    imageURL: "./images/Arijit-Singh2.jpg",
     liked: false
   }, {
     id: 0,
@@ -44,7 +44,7 @@ const allSongs = [
     artists: [],
     singer: ['Arijit Singh'],
     duration: 0,
-    imageURL: "./images/Arijit-Singh.png",
+    imageURL: "./images/Arijit-Singh2.jpg",
     liked: false
   },
 ]
@@ -99,7 +99,7 @@ $("#drop-down-menu").on('click', () => {
   $("#menu-list").toggleClass('flex');
 })
 
-// onclick for logo to dropdown playlist options..................
+// onclick for logo to dropdown playlist options when screen size small..................
 
 document.querySelector('#logo').addEventListener('click', () => {
   document.querySelector("#aside-playlist").classList.toggle('hidden');
@@ -121,6 +121,7 @@ const playlists = [];
 if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.getItem('PlayList')).length > 0) {
   const PL = JSON.parse(window.localStorage.getItem('PlayList')) || [];
   playlists.push(...PL); // put existing playlist items into localStorage
+  console.log("was not empty: ", playlists);
 
 } else {
   playlists.push({
@@ -134,7 +135,7 @@ if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.ge
     });
 
   window.localStorage.setItem('PlayList', JSON.stringify(playlists));
-  console.log(playlists);
+  console.log("was empty: ", playlists);
 }
 
 // Add NEW Playlist to Library..............................
@@ -162,7 +163,6 @@ const addPToLibrary = (name) => {
 $('#save-PL-name').on('click', () => {
   let name = $('#name-PL-input input').val();
   addPToLibrary(name);
-
 });
 // Strt the creation of playlist by clicking on icon.............
 $("#start-PL-creation").on('click', () => {
@@ -222,7 +222,6 @@ const displayPlaylist = (playlist) => {
 console.log('this is PL: ', playlists)
 
 // Show the all the available playlists...........
-
 playlists.forEach(playlist => {
   displayPlaylist(playlist)
 })
@@ -244,9 +243,9 @@ const renderSongs = (playList) => {
     songImage.classList.add("whitespace-nowrap", 'px-4', 'py-4');
     const songImageContent = `
       <div class="flex items-center">
-        <div class="h-10 w-10 flex-shrink-0">
+        <div class="h-[55px] w-[55px] flex-shrink-0">
           <img
-            class="h-10 w-10 rounded-full object-cover"
+            class="h-[100%] w-[100%] rounded-full object-cover"
             src="${song.imageURL}"
             alt=""
           />
@@ -284,42 +283,6 @@ const renderSongs = (playList) => {
     const likeSpan = document.createElement('span');
     const likeBtn = document.createElement('button');
     likeBtn.classList.add('fa-regular', 'fa-heart', 'm-5', 'cursor-pointer');
-    // likeBtn.addEventListener('click', () => {
-    //   // $(likeBtn).css('color', 'red');
-    //   song.liked = !song.liked;
-    //   // turn the liked button to red onclick
-    //   $(likeBtn).toggleClass('fa-regular');
-    //   $(likeBtn).toggleClass('fa-solid text-red-500');
-    //   // add song to liked songs plylist or remove from it on click of like button.....
-    //   if (song.liked) {
-    //     const updatedPlaylist = JSON.parse(window.localStorage.getItem('PlayList') || []);
-    //     updatedPlaylist.forEach(playlist => {
-    //       if (playlist.name === 'Liked Songs') {
-    //         playlist.songs.push(song)
-    //         return;
-    //       }
-    //     })
-    //     window.localStorage.setItem('PlayList', JSON.stringify(updatedPlaylist))
-    //   }
-    //   else {
-    //     const updatedPlaylist = JSON.parse(window.localStorage.getItem('PlayList') || []);
-    //     updatedPlaylist.forEach(playlist => {
-    //       if (playlist.name === 'Liked Songs') {
-    //         // Keep all songs except the one to be removed
-    //         const newSongs = []
-    //         playlist.songs.forEach(currSong => {
-    //           if (currSong.name !== song.name) {
-    //             newSongs.push(currSong)
-    //           }
-    //         });
-    //         playlist.songs = newSongs;
-    //         return;
-    //       }
-    //     });
-    //     window.localStorage.setItem('PlayList', JSON.stringify(updatedPlaylist));
-    //     renderSongs(playList)
-    //   }
-    // });
 
     likeBtn.addEventListener('click', () => {
       // Toggle the liked status of the song
@@ -329,20 +292,15 @@ const renderSongs = (playList) => {
       $(likeBtn).toggleClass('fa-regular');
       $(likeBtn).toggleClass('fa-solid text-red-500');
 
-      // Handle adding/removing the song from the Liked Songs playlist
       const updatedPlaylist = JSON.parse(window.localStorage.getItem('PlayList') || []);
-      const likedSongsPlaylist = updatedPlaylist.find(playlist => playlist.name === 'Liked Songs');
+      const likedSongsPlaylist = updatedPlaylist.find(playlist => playlist.name === "Liked Songs");
       // For updated Liked songs in All Songs PlayList.... 
       updatedPlaylist.forEach(playlist => {
-        if (playlist.name === 'All Songs') {
-          playlist.songs.forEach(song1 => {
-            if (song1.name == song.name) {
-              song1.liked = song.liked;
-              // return;
-            }
-          })
-          // return;
-        }
+        playlist.songs.forEach(song1 => {
+          if (song1.name == song.name) {
+            song1.liked = song.liked;
+          }
+        })
       });
 
       if (song.liked) {
@@ -353,48 +311,73 @@ const renderSongs = (playList) => {
       } else {
         // Remove the song from the Liked Songs playlist
         likedSongsPlaylist.songs = likedSongsPlaylist.songs.filter(currSong => currSong.name !== song.name);
+        if (playList.name === "Liked Songs") songRow.remove();
       }
-
       // Update the local storage with the modified playlist
       window.localStorage.setItem('PlayList', JSON.stringify(updatedPlaylist));
       // playList = updatedPlaylist;
       // If the current playlist is the Liked Songs playlist, rerender the songs
       console.log(updatedPlaylist)
-      // renderSongs(updatedPlaylist)
     });
+
     if (song.liked) {
       likeBtn.classList.remove('fa-regular');
       likeBtn.classList.add('fa-solid', 'text-red-500')
     }
     likeSpan.appendChild(likeBtn);
     btnCell.appendChild(likeSpan)
-    // More options icon
-    const optionSpan = document.createElement('span');
-    const playListSelector = document.createElement('select');
-    playListSelector.classList.add('select', 'bg-[var(--primary-color)]', 'select-info', 'w-fit', 'max-w-xs', 'text-sm', 'font-semibold', 'hover:text-gray-500', 'bg-[--primary-color]', 'text-[--text-color]');
-    const currPlaylists = JSON.parse(window.localStorage.getItem('PlayList') || []);
-    currPlaylists.forEach(playlist => {
-      const option = document.createElement('option');
-      option.classList.add('bg-[var(--ternary-color)]');
-      option.textContent = playlist.name;
-      playListSelector.appendChild(option);
-      option.addEventListener('click', () => {
-        if (playList.name !== "Liked Songs") {
-          playlist.songs.push(song);
+
+    // Add options to add songs to other playlists only for liked songs and All songs playlist 
+    if (playList.name === "Liked Songs" || playList.name === "All Songs") {// Add to PLaylist Options
+      const optionSpan = document.createElement('span');
+      const playListSelector = document.createElement('select');
+      playListSelector.classList.add('bg-[var(--primary-color)]',
+        'select-info', 'w-fit', 'max-w-xs', 'text-sm', 'font-semibold', 'hover:text-gray-500',
+        'bg-[--primary-color]', 'text-[--text-color]');
+      const currPlaylists = JSON.parse(window.localStorage.getItem('PlayList') || []);
+      const defaultOption = document.createElement('option');
+
+      defaultOption.classList.add('bg-[var(--ternary-color)]');
+      defaultOption.textContent = "Select to add"
+      playListSelector.appendChild(defaultOption);
+
+      currPlaylists.forEach(playlist => {
+        const option = document.createElement('option');
+        option.classList.add('bg-[var(--ternary-color)]');
+        if (playlist.name !== "Liked Songs" && playlist.name !== "All Songs") {
+          option.textContent = playlist.name;
+          playListSelector.appendChild(option);
         }
+      });
+      playListSelector.addEventListener('change', (e) => {
+        const selectedPlayList = e.target.value;
+        const toUpdatePL = JSON.parse(window.localStorage.getItem('PlayList') || [])
+        const PL_to_Change = toUpdatePL.find(PL => PL.name === selectedPlayList);
+        PL_to_Change.songs.push(song);
+        window.localStorage.setItem('PlayList', JSON.stringify(toUpdatePL));
+        console.log()
       })
-    });
-    optionSpan.appendChild(playListSelector);
-    btnCell.appendChild(optionSpan);
+
+      optionSpan.appendChild(playListSelector);
+      btnCell.appendChild(optionSpan);
+    }
 
     // Remove option............
-    const removeSpan = document.createElement('span');
-    const removebtn = document.createElement('button');
-    removebtn.innerHTML = `<i id='delete-icon' class="fa-solid fa-trash"><i>`;
-    removebtn.addEventListener('click', () => {
-      songRow.remove();
-    })
-    if (playList.name !== "Liked Songs") {
+    if (playList.name !== "Liked Songs" && playList.name !== "All Songs") {
+      const removeSpan = document.createElement('span');
+      const removebtn = document.createElement('button');
+      removebtn.innerHTML = `<i id='delete-icon' class="fa-solid fa-trash"><i>`;
+      removebtn.addEventListener('click', () => {
+        songRow.remove();
+        // Remove from local storage...........
+        const updatedPlaylist = JSON.parse(window.localStorage.getItem('PlayList') || []);
+        const currPlaylist = updatedPlaylist.find(playlist => playlist.name === playList.name);
+        // Remove the song from the Liked Songs playlist
+        currPlaylist.songs = currPlaylist.songs.filter(currSong => currSong.name !== song.name);
+        // Update the local storage with the modified playlist
+        window.localStorage.setItem('PlayList', JSON.stringify(updatedPlaylist));
+      })
+      removeSpan.appendChild(removebtn)
       btnCell.appendChild(removeSpan);
     }
 
@@ -410,10 +393,17 @@ const renderSongs = (playList) => {
   });
 };
 
+
+const ALLPlaylists = JSON.parse(window.localStorage.getItem('PlayList')) || [];
+const allSongsPlaylist = ALLPlaylists.find(playList => playList.name == "All Songs")
+allSongsPlaylist.songs.forEach(song => {
+  const currSong = allSongs.find(SONG => SONG.name === song.name);
+  currSong.liked = song.liked;
+})
+window.localStorage.setItem('PlayList', JSON.stringify(ALLPlaylists));
+renderSongs(allSongsPlaylist);
+
 $('#home').on('click', () => {
   renderSongs(allSongsPlaylist);
 });
-const ALLPlaylists = JSON.parse(window.localStorage.getItem('PlayList')) || [];
-const allSongsPlaylist = ALLPlaylists.find(playList => playList.name == "All Songs")
-renderSongs(allSongsPlaylist);
 

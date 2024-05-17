@@ -70,15 +70,6 @@
                     <option disabled selected>Select Genre</option>
                   </select>
                 </li>
-                <!-- <li>
-                  <a
-                    id="singer"
-                    href="#"
-                    class="text-sm font-semibold  hover:text-gray-500"
-                  >
-                    Singer
-                  </a>
-                </li> -->
               </ul>
             </div>
 
@@ -177,13 +168,13 @@
         <article id="playing-now" class="flex flex-col justify-center items-center w-[300px] mt-[15px] mb-[10px] bg-transparent bg-opacity-10 ">
             <audio src="" id="played-song"></audio>
 
-            <div id="music-img" class="relative h-[400px] w-[300px] rounded-md ">
+            <div id="music-img" class="relative h-[350px] w-[250px] rounded-md bg-transparent overflow-hidden">
                 <img
                 id="music-img"
                   src="" alt=""
-                  class="z-0 h-full w-full rounded-md object-cover"
+                  class="z-0 h-full w-full object-cover"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+                <div class="absolute inset-0 backdrop-blur-md bg-white/10"></div>
                 <div class="absolute bottom-4 left-4 text-left">
                   <h1 id="song-Name" class="text-lg font-semibold text-white"></h1>
                   <p id="info-singers" class="mt-2 text-sm text-gray-300">
@@ -227,7 +218,7 @@
             </div>
             
         </article>
-
+        
         
         <section class="mx-auto w-full max-w-7xl px-4 py-4 ">
           <div class="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
