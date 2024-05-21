@@ -554,6 +554,10 @@ video {
   --tw-contain-style:  ;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .fixed {
   position: fixed;
 }
@@ -632,11 +636,6 @@ video {
 .mx-0 {
   margin-left: 0px;
   margin-right: 0px;
-}
-
-.mx-1 {
-  margin-left: 0.25rem;
-  margin-right: 0.25rem;
 }
 
 .mx-2 {
@@ -768,12 +767,12 @@ video {
   height: 2.5rem;
 }
 
-.h-2 {
-  height: 0.5rem;
-}
-
 .h-\[100\%\] {
   height: 100%;
+}
+
+.h-\[10px\] {
+  height: 10px;
 }
 
 .h-\[350px\] {
@@ -797,12 +796,24 @@ video {
   height: 100vh;
 }
 
+.h-0 {
+  height: 0px;
+}
+
+.h-\[70\%\] {
+  height: 70%;
+}
+
 .w-10 {
   width: 2.5rem;
 }
 
 .w-\[100\%\] {
   width: 100%;
+}
+
+.w-\[12\%\] {
+  width: 12%;
 }
 
 .w-\[20\%\] {
@@ -829,10 +840,6 @@ video {
   width: 70%;
 }
 
-.w-\[80\%\] {
-  width: 80%;
-}
-
 .w-fit {
   width: -moz-fit-content;
   width: fit-content;
@@ -840,6 +847,18 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[0\%\] {
+  width: 0%;
+}
+
+.w-\[10\%\] {
+  width: 10%;
+}
+
+.w-\[80\%\] {
+  width: 80%;
 }
 
 .min-w-full {
@@ -1189,14 +1208,29 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-md {
+  --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.shadow-black {
+  --tw-shadow-color: #000;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
 .outline-\[var\(--text-color\)\] {
   outline-color: var(--text-color);
+}
+
+.outline-black {
+  outline-color: #000;
 }
 
 .filter {
@@ -1264,13 +1298,13 @@ body{
   background-repeat: no-repeat;
 }
 
-/* option{
-    background-color: var(--ternary-color);
-} */
-
-#seek-display{
-  width: 50%;
+select{
+  background-color: transparent;
 }
+
+/* #seek-display{
+    width: 50%;
+} */
 
 #playing-now.playing #seek-display{
   width: 90%;

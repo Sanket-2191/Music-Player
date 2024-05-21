@@ -68,6 +68,7 @@
                    hover:text-gray-500
                   bg-[--primary-color] text-[--text-color]">
                     <option disabled selected>Select Genre</option>
+                    <option >ALL</option>
                   </select>
                 </li>
               </ul>
@@ -166,21 +167,20 @@
           Now Playing <span ><i class="fa-solid fa-eject cursor-pointer " id="up-down-btn"></i></span>
         </p>
         <article id="playing-now" class="flex flex-col justify-center items-center w-[300px] mt-[15px] mb-[10px] bg-transparent bg-opacity-10 ">
-            <audio src="" id="played-song"></audio>
+            
 
-            <div id="music-img" class="relative h-[350px] w-[250px] rounded-md bg-transparent overflow-hidden">
-                <img
-                id="music-img"
-                  src="" alt=""
-                  class="z-0 h-full w-full object-cover"
+            <div id="music-img" class="relative flex flex-col h-[350px] w-[250px] rounded-md bg-transparent overflow-hidden">
+                
+                <div class="absolute inset-0 backdrop-blur-md bg-white/10">
+                  <img
+                  id="song-img"
+                  src="" alt="image"
+                  class="z-0 h-[70%] w-full object-cover"
                 />
-                <div class="absolute inset-0 backdrop-blur-md bg-white/10"></div>
+                </div>
                 <div class="absolute bottom-4 left-4 text-left">
-                  <h1 id="song-Name" class="text-lg font-semibold text-white"></h1>
-                  <p id="info-singers" class="mt-2 text-sm text-gray-300">
-                    
-                  </p>
-                  
+                  <h1 id="song-Name" class="text-lg font-semibold text-white outline-black"></h1>
+                  <h2 id="info-singers" class="mt-2 text-sm text-gray-300 outline-black""></h2>
                 </div>
             </div>
             <div id="controls" class="flex flex-col justify-center items-center w-[300px]  h-fit">
@@ -191,31 +191,30 @@
                 </button>
                 
                 <button id="play-pause" class="m-4 my-0 w-10 h-10 ">
-                  <i class="fa-solid fa-play" style="color: var(--text-color);"></i>
-                  <!-- <i class="fa-solid fa-pause" style="color: var(--text-color);"></i> -->
+                  <i class="fa-solid fa-play fa-lg" style="color: var(--text-color);"></i>
+                  <!-- <i class="fa-solid fa-pause fa-lg" style="color: var(--text-color);"></i> -->
                 </button>
                 <button id="next" class="ml-4 my-0 w-10 h-10 ">
                   <i class="fa-solid fa-forward" style="color: var(--text-color);"></i>
                 </button>
               </div>
               <div id="seek-control" class="flex justify-center items-center p-2 w-[100%] h-fit">
-                <div id="passed-duration" 
-                class="mr-2">
+                <div id="passed-duration" class="mr-2">
                   0:00
                 </div>
-                <div id="seek" class="mx-1 w-[80%]" >
-                  <input id="input-seek" type="range" min="0" max="4.5" step="0.1" value="4.2" 
-                  class="color-[var(--ternary-color)] hidden"/>
-                  <label id="seek-label" for="input-seek" class="flex w-[100%] h-2 bg-[var(--text-color)] rounded-md overflow-hidden">
-                    <div id="seek-display" class=" h-2 bg-[var(--ternary-color)] rounded-md"></div>
-                  </label>
+                <div id="progress-container" class="bg-[var(--secondary-color)] shadow-md h-fit w-[80%] rounded-md overflow-hidden">
+                  <!-- <div id="progress" class="bg-[var(--text-color)] h-[100%] w-[12%] rounded-md">
+                    
+                  </div> -->
+                  <input type="range" id="progress-input" min="0" max="100" value="0" step="0.2" class="hidden">
+                  <label id="progress-label" for="progress-input" class="block h-[10px] bg-[var(--text-color)]"></label>
                 </div>
-                <div id="re-duration" class="ml-2">
-                  4:30
-                </div>
+                
               </div>
+              <audio src="" id="played-song"></audio>
               
             </div>
+            
             
         </article>
         

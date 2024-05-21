@@ -35,12 +35,12 @@ body{
     background-image: linear-gradient(0deg, var(--ternary-color),var(--secondary-color), var(--primary-color) ); 
     background-repeat: no-repeat;
 }
-/* option{
-    background-color: var(--ternary-color);
-} */
-#seek-display{
-    width: 50%;
+select{
+    background-color: transparent;
 }
+/* #seek-display{
+    width: 50%;
+} */
 
 #playing-now.playing #seek-display{
     width: 90%;

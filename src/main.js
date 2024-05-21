@@ -1,6 +1,8 @@
 // import { updateSongDisplay } from './music_player'
+// import * as star from "../".
+import { updateSongDisplay, playSong, pauseSong, prevSong, nextSong, updateSongList } from "./music_player.js";
 
-var allSongs = [
+const allSongs = [
   {
     id: 0,
     name: "Satranga",
@@ -8,6 +10,7 @@ var allSongs = [
     artists: [],
     singer: ['Arijit Singh'],
     duration: 0,
+    src: "./music/Satranga.mp3",
     imageURL: "./images/Arijit-Singh.png",
     liked: false
   }, {
@@ -17,6 +20,7 @@ var allSongs = [
     artists: [],
     singer: ['Vishal Dadlani'],
     duration: 0,
+    src: "./music/Dhan Te Nan.mp3",
     imageURL: "./images/Vishal-Dadlani.webp",
     liked: false
   }, {
@@ -26,6 +30,7 @@ var allSongs = [
     artists: [],
     singer: ['Arijit Singh'],
     duration: 0,
+    src: "./music/Aayat.mp3",
     imageURL: "./images/Arijit-Singh2.jpg",
     liked: false
   }, {
@@ -35,6 +40,7 @@ var allSongs = [
     artists: [],
     singer: ['Raghav Chaitanya'],
     duration: 0,
+    src: "./music/Ek Tukda Dhoop.mp3",
     imageURL: "./images/raghav chaitanya.jpg",
     liked: false
   }, {
@@ -44,12 +50,53 @@ var allSongs = [
     artists: [],
     singer: ['Arijit Singh'],
     duration: 0,
+    src: "./music/Safar.mp3",
     imageURL: "./images/Arijit-Singh2.jpg",
     liked: false
   },
 ]
+export const prev = document.querySelector("#previous i")
+export const play_pause = document.querySelector("#play-pause i")
+export const next = document.querySelector("#next i")
+export const progress = document.querySelector("#progress")
+export const currSongList = (JSON.parse(window.localStorage.getItem('PlayList')) || []).find(playlist => playlist.name === 'All Songs').songs;
+console.log(currSongList)
+updateSongList(currSongList)
+const togglePlayPause = (fun) => {
 
+}
+//click & drag events for music player...... 
+play_pause.addEventListener('click', () => {
+  // play_pause.classList.toggle('fa-play');
+  // play_pause.classList.toggle('fa-pause');
+  if (play_pause.classList.contains('fa-play')) {
+    play_pause.classList.remove('fa-play');
+    play_pause.classList.add('fa-pause');
+    playSong();
+  }
+  else {
+    play_pause.classList.remove('fa-pause');
+    play_pause.classList.add('fa-play');
+    pauseSong();
+  }
+})
 
+prev.addEventListener('click', () => {
+  if (play_pause.classList.contains('fa-play')) {
+    play_pause.classList.remove('fa-play');
+    play_pause.classList.add('fa-pause');
+
+  }
+  prevSong();
+});
+next.addEventListener('click', () => {
+  if (play_pause.classList.contains('fa-play')) {
+    play_pause.classList.remove('fa-play');
+    play_pause.classList.add('fa-pause');
+
+  }
+  nextSong();
+});
 // Options for genre............ 
 const genreList = [];
 
@@ -178,7 +225,7 @@ const displayPlaylist = (playlist) => {
   // individual playlist div outer most to constain name and delete button.... 
   const playListBox = document.createElement('li');
   playListBox.classList.add("flex", 'transform', 'justify-between', 'items-center', 'rounded-lg', 'px-3', 'py-2',
-    'transition-colors', 'duration-300', 'hover:bg-[var(--text-color)]', "hover:text-gray-400");
+    'transition-colors', 'duration-300', 'hover:bg-[var(--text-color)]', "hover:text-gray-400", 'cursor-pointer');
 
   const playListName = document.createElement('span');
 
@@ -204,7 +251,11 @@ const displayPlaylist = (playlist) => {
   document.querySelector('#show-playlists').appendChild(playListBox)
   playListBox.addEventListener('click', () => {
     const currPL = (JSON.parse(window.localStorage.getItem('PlayList')) || []).find(pl => pl.name === playlist.name)
-    console.log(currPL)
+    // console.log(currPL)
+    currSongList.length = 0;
+    currSongList.push(...(currPL.songs));
+    console.log(currSongList, " from main.js");
+    updateSongList(currSongList);
     renderSongs(currPL);
   })
 }
@@ -226,7 +277,7 @@ const renderSongs = (playList) => {
   playList.songs.forEach(song => {
     // create new row for song
     const songRow = document.createElement('tr');
-    songRow.classList.add("hover:bg-gray-700");
+    songRow.classList.add("hover:bg-gray-700", 'cursor-pointer');
 
     //create data cell for song image and name
     const songImage = document.createElement('td');
@@ -373,15 +424,33 @@ const renderSongs = (playList) => {
 
     songRow.appendChild(btnCell);
 
+    songRow.addEventListener('click', () => {
+      console.log(`Clicked to play the song ${song.name}`)
+      updateSongDisplay(song);
+      play_pause.classList.remove('fa-play');
+      play_pause.classList.add('fa-pause');
+      playSong();
+    })
 
-    // songRow.addEventListener('click', () => {
-    //   updateSongDisplay(song.name, song.singer)
-    // })
+
     songsTable.appendChild(songRow); // Append the row to the table
-
-
   });
+
 };
+
+// Genre-wise songs render
+$("#genre-Selection").on('change', (e) => {
+  const GENRE = e.target.value;
+  console.log(GENRE);///////////////////////////////////////////////////////////
+  const plName = $('#playlist-name').text();
+  const ALLPlaylists = JSON.parse(window.localStorage.getItem('PlayList')) || [];
+
+  const currPL = ALLPlaylists.find(playList => playList.name == plName)
+
+  if (GENRE !== "ALL") currPL.songs = currPL.songs.filter(song => song.genre === GENRE)
+  updateSongList(currPL.songs);
+  renderSongs(currPL);
+})
 
 
 const ALLPlaylists = JSON.parse(window.localStorage.getItem('PlayList')) || [];
@@ -389,6 +458,8 @@ const allSongsPlaylist = ALLPlaylists.find(playList => playList.name == "All Son
 allSongsPlaylist.songs.forEach(song => {
   const currSong = allSongs.find(SONG => SONG.name === song.name);
   currSong.liked = song.liked;
+  song.imageURL = currSong.imageURL;
+  song.src = currSong.src;
 })
 window.localStorage.setItem('PlayList', JSON.stringify(ALLPlaylists));
 renderSongs(allSongsPlaylist);
