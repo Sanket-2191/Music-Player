@@ -55,6 +55,30 @@ const allSongs = [
     liked: false
   },
 ]
+
+// Add song to playlist onClick of "add to playlist" button.......
+const playlists = [];
+
+if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.getItem('PlayList')).length > 0) {
+  const PL = JSON.parse(window.localStorage.getItem('PlayList')) || [];
+  playlists.push(...PL); // put existing playlist items into localStorage
+  console.log("was not empty: ", playlists);
+
+} else {
+  playlists.push({
+    name: 'All Songs',
+    songs: allSongs
+  });
+  playlists.push(
+    {  // Push playlist default in localstorage if there is not playlists in localstorage.
+      name: "Liked Songs",
+      songs: []
+    });
+
+  window.localStorage.setItem('PlayList', JSON.stringify(playlists));
+  console.log("was empty: ", playlists);
+}
+
 export const prev = document.querySelector("#previous i")
 export const play_pause = document.querySelector("#play-pause i")
 export const next = document.querySelector("#next i")
@@ -162,28 +186,7 @@ document.querySelector('#logo').addEventListener('click', () => {
   }
 })
 
-// Add song to playlist onClick of "add to playlist" button.......
-const playlists = [];
 
-if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.getItem('PlayList')).length > 0) {
-  const PL = JSON.parse(window.localStorage.getItem('PlayList')) || [];
-  playlists.push(...PL); // put existing playlist items into localStorage
-  console.log("was not empty: ", playlists);
-
-} else {
-  playlists.push({
-    name: 'All Songs',
-    songs: allSongs
-  });
-  playlists.push(
-    {  // Push playlist default in localstorage if there is not playlists in localstorage.
-      name: "Liked Songs",
-      songs: []
-    });
-
-  window.localStorage.setItem('PlayList', JSON.stringify(playlists));
-  console.log("was empty: ", playlists);
-}
 
 // Add NEW Playlist to Library..............................
 const addPToLibrary = (name) => {
