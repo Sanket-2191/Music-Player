@@ -62,7 +62,7 @@ const playlists = [];
 if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.getItem('PlayList')).length > 0) {
   const PL = JSON.parse(window.localStorage.getItem('PlayList')) || [];
   playlists.push(...PL); // put existing playlist items into localStorage
-  console.log("was not empty: ", playlists);
+  // console.log("was not empty: ", playlists);
 
 } else {
   playlists.push({
@@ -76,7 +76,7 @@ if (window.localStorage.getItem('PlayList') && JSON.parse(window.localStorage.ge
     });
 
   window.localStorage.setItem('PlayList', JSON.stringify(playlists));
-  console.log("was empty: ", playlists);
+  // console.log("was empty: ", playlists);
 }
 
 export const prev = document.querySelector("#previous i")
@@ -402,8 +402,9 @@ const renderSongs = (playList) => {
         window.localStorage.setItem('PlayList', JSON.stringify(toUpdatePL));
         console.log()
       })
-
+      playListSelector.addEventListener('click', (e) => e.stopPropagation())
       optionSpan.appendChild(playListSelector);
+      optionSpan.addEventListener('click', (e) => e.stopPropagation())
       btnCell.appendChild(optionSpan);
     }
 
@@ -430,7 +431,7 @@ const renderSongs = (playList) => {
 
     songRow.addEventListener('click', (e) => {
       e.stopPropagation();
-      console.log(`Clicked to play the song ${song.name}`)
+      // console.log(`Clicked to play the song ${song.name}`)
       updateSongDisplay(song);
       play_pause.classList.remove('fa-play');
       play_pause.classList.add('fa-pause');
@@ -446,7 +447,7 @@ const renderSongs = (playList) => {
 // Genre-wise songs render
 $("#genre-Selection").on('change', (e) => {
   const GENRE = e.target.value;
-  console.log(GENRE);///////////////////////////////////////////////////////////
+  // console.log(GENRE);///////////////////////////////////////////////////////////
   const plName = $('#playlist-name').text();
   const ALLPlaylists = JSON.parse(window.localStorage.getItem('PlayList')) || [];
 

@@ -19,21 +19,21 @@ const formatTime = (timeInSeconds) => {
 export const updateSongList = (currSongList) => {
     songList.length = 0;
     songList.push(...currSongList);
-    console.log(songList, " from music plyer component");
+    // console.log(songList, " from music plyer component");
     index = 0;
 }
 const updateIndex = (Song) => {
     for (let i = 0; i < songList.length; i++) {
-        console.log('In updateIndex at i: ', i);
+        // console.log('In updateIndex at i: ', i);
         if (songList[i].name === Song.name) {
-            console.log('found song at i: ', i);
+            // console.log('found song at i: ', i);
             return i; // Return the index if the song is found
         }
     }
 }
 export const updateSongDisplay = (song) => {
     index = updateIndex(song);
-    console.log(`done updating index to: ${index}`)
+    // console.log(`done updating index to: ${index}`)
     songImage.src = song.imageURL;
     songImage.alt = song.name;
     audioControls.src = song.src;
@@ -45,7 +45,7 @@ export const updateSongDisplay = (song) => {
 export const playSong = () => {
     audioControls.play();
 
-    console.log(`playing song ${audioControls.src}`);
+    // console.log(`playing song ${audioControls.src}`);
 
     // Set the max value of the progress input to the song duration
     audioControls.addEventListener('loadedmetadata', () => {
@@ -66,7 +66,7 @@ export const playSong = () => {
     // Clear the interval when the song ends
     audioControls.addEventListener('ended', () => {
         clearInterval(playing);
-        console.log('Song ended, interval cleared');
+        // console.log('Song ended, interval cleared');
     });
 
     // Update the audio currentTime when the range input changes
@@ -76,7 +76,7 @@ export const playSong = () => {
 };
 export const pauseSong = () => {
     audioControls.pause();
-    console.log(`paused song ${audioControls.src}`)
+    // console.log(`paused song ${audioControls.src}`)
 }
 
 export const prevSong = () => {
