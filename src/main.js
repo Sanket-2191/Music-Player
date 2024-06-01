@@ -413,7 +413,8 @@ const renderSongs = (playList) => {
       const removeSpan = document.createElement('span');
       const removebtn = document.createElement('button');
       removebtn.innerHTML = `<i id='delete-icon' class="fa-solid fa-trash"><i>`;
-      removebtn.addEventListener('click', () => {
+      removebtn.addEventListener('click', (e) => {
+        e.stopPropagation()
         songRow.remove();
         // Remove from local storage...........
         const updatedPlaylist = JSON.parse(window.localStorage.getItem('PlayList') || []);
