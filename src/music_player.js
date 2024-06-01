@@ -66,6 +66,7 @@ export const playSong = () => {
     // Clear the interval when the song ends
     audioControls.addEventListener('ended', () => {
         clearInterval(playing);
+        nextSong();
         // console.log('Song ended, interval cleared');
     });
 
