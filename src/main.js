@@ -328,8 +328,9 @@ const renderSongs = (playList) => {
     const likeBtn = document.createElement('button');
     likeBtn.classList.add('fa-regular', 'fa-heart', 'm-5', 'cursor-pointer');
 
-    likeBtn.addEventListener('click', () => {
+    likeBtn.addEventListener('click', (e) => {
       // Toggle the liked status of the song
+      e.stopPropagation();
       song.liked = !song.liked;
 
       // Toggle the classes for the like button to change its appearance
@@ -427,7 +428,8 @@ const renderSongs = (playList) => {
 
     songRow.appendChild(btnCell);
 
-    songRow.addEventListener('click', () => {
+    songRow.addEventListener('click', (e) => {
+      e.stopPropagation();
       console.log(`Clicked to play the song ${song.name}`)
       updateSongDisplay(song);
       play_pause.classList.remove('fa-play');
